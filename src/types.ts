@@ -18,4 +18,4 @@ export enum CommandFunction {
 }
 
 export type GridState = [CardinalDirection, number, number];
-export type GridCommand = [CommandFunction, number]
+export type GridCommand = [CommandFunction, number];
