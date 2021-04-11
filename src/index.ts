@@ -1,10 +1,4 @@
-// const str = 'M23R2L4M40M2'
-const str = "M23R2LR4M40M2";
-// const str = 'M99M2'
-
 const VOCAB_RE = /(M|R|L)(\d*)/;
-
-const DIRECTIONS = ["N", "E", "S", "W"];
 const GRID_SIZE = 100;
 
 export enum CardinalDirection {
@@ -28,10 +22,9 @@ export enum CommandFunction {
 type GridState = [CardinalDirection, number, number];
 type GridCommand = [CommandFunction, string]
 
+
 export function wrap(val: number, max: number = GRID_SIZE, min: number = 0) {
-  if (val >= max) return (val % max) + min;
-  if (val < min) return max - (Math.abs(min - val));
-  return val;
+  return ((val % max) + max) % max;
 }
 
 export function commandMoveBy(state: GridState, val: number) : GridState {
@@ -72,11 +65,11 @@ export function getNextState(currentState: GridState, command: GridCommand) : Gr
       }
 
       if (cmd === CommandFunction.R) {
-        return commandRotate(currentState, +val);
+        return commandRotate(currentState, RotateDirection.RIGHT * val);
       }
 
       if (cmd === CommandFunction.L) {
-        return commandRotate(currentState, -val);
+        return commandRotate(currentState, RotateDirection.LEFT * val);
       }
 
       return currentState;
@@ -85,7 +78,7 @@ export function getNextState(currentState: GridState, command: GridCommand) : Gr
 export function getFinalState(initialStateStr: string, commandStr: string) : string {
   const [dir, x, y] = initialStateStr.split(" ");
   const initialState : GridState = [
-    DIRECTIONS.indexOf(dir),
+    CardinalDirection[dir as keyof typeof CardinalDirection],
     parseInt(x, 10),
     parseInt(y, 10),
   ];
@@ -103,5 +96,5 @@ export function getFinalState(initialStateStr: string, commandStr: string) : str
     })
     .reduce(getNextState, initialState);
 
-  return [DIRECTIONS[finalState[0]], finalState[1], finalState[2]].join(" ");
+  return [CardinalDirection[finalState[0]], finalState[1], finalState[2]].join(" ");
 }
