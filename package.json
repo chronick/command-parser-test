@@ -4,6 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "type": "module",
+  "engine": {
+    "node": ">=12.18.3"
+  },
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage"
