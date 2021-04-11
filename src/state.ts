@@ -33,5 +33,3 @@ export function getNextState(currentState: GridState, command: GridCommand): Gri
 export function getFinalState(commands: GridCommand[], initialState: GridState) {
   return commands.reduce(getNextState, initialState);
 }
-
-
