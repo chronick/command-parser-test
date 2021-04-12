@@ -13,3 +13,10 @@ Run the tests with the following command:
 ```
 npm test
 ```
+
+## Run the parser
+
+To run the parser against a file:
+```
+npm run parse -- <path-to-file>
+```
