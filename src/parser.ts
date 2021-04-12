@@ -1,4 +1,3 @@
-import fs from 'fs';
 import {
   getFinalState
 } from './state';
@@ -13,7 +12,6 @@ import {
 import {
   VOCAB_RE
 } from './config';
-
 
 export function getFinalPosition(initialStateStr: string, commandStr: string): string {
   // create initial state array
