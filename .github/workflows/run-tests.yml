@@ -1,19 +1,14 @@
-name: Node.js CI
+name: Run Tests
 
 on:
-  push:
-    branches: [ $default-branch ]
   pull_request:
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x, 15.x]
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -21,6 +16,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run build --if-present
     - run: npm test
+    - run: npm run parse -- test-data/test1.txt
 

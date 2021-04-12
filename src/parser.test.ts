@@ -1,4 +1,4 @@
-import { getFinalPosition } from './index';
+import { getFinalPosition } from './parser';
 
 describe(getFinalPosition.name, () => {
   test('default params', () => {
